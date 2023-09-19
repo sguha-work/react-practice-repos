@@ -1,0 +1,17 @@
+Preparing asynchronus thunk
+
+1> Install react-redux, @reduxjs/toolkit
+2> prepare a folder named "redux"
+3> Prepare sub folders for actions and reducers
+4> prepare the action with "createAsyncThunk"
+5> prepare the reducer with "createSlice"
+6> prepare the store with "configStore"
+
+How to execute
+from component
+
+1> import useSelector hook and useDispath hook from react-redux
+2> prepare the state with useSelector and dispatch with useDispatch
+3> import the action
+4> dispatch the action with dispatchher
+5> prepare the store states to display progress/success/error

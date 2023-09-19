@@ -1,0 +1,14 @@
+.DogTypeListSimpleAjaxComponent {
+  border: 1px solid red;
+  margin: 10px;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+}
+.DogTypeListUsingUseSuspenseComponent {
+  border: 1px solid green;
+  margin: 10px;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+}

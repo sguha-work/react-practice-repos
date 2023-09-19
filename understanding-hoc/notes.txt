@@ -1,0 +1,39 @@
+const promise1 = new Promise(function(resolve, reject){
+	window.setTimeout(function(){
+  	//console.log('Kolkata');
+  	resolve('Kolkata')
+  },2000);
+});
+
+const promise2 = new Promise(function(resolve, reject){
+	window.setTimeout(function(){
+    	//console.log('Delhi');
+  	reject('Delhi')
+  },5000);
+});
+
+const promiseArray = [promise1, promise2];
+
+// example of calling the promises individually
+promise1.then(function(value){
+	console.log('resolve',value);
+}).catch(function(value){
+	console.log('reject',value);
+})
+
+promise2.then(function(value){
+	console.log('resolve',value);
+}).catch(function(value){
+	console.log('reject', value);
+})
+
+// example of all/setteled
+Promise.all(promiseArray).then(function(){
+    // this section will not get executed
+}).catch(function(){
+    // the execution will come to catch, because the delhi promise is rejected
+});
+
+Promise.allSettled(promiseArray).then(function(){
+    // this section will  get executed despite of rejection of delhi promise
+})

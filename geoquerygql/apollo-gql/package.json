@@ -1,0 +1,27 @@
+{
+  "name": "geo-socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/schema": "^9.0.12",
+    "apollo-server": "^3.11.1",
+    "apollo-server-express": "^3.11.1",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "graphql": "^15.8.0",
+    "graphql-subscriptions": "^2.0.0",
+    "https": "^1.0.0",
+    "mongoose": "^6.8.0",
+    "mongoose-patcher": "^0.3.0",
+    "nodemon": "^2.0.20",
+    "subscriptions-transport-ws": "^0.11.0"
+  }
+}

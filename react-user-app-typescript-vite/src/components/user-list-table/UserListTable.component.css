@@ -1,0 +1,22 @@
+.table_users {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .table_users td, .table_users th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .table_users tr:nth-child(even){background-color: #1c1a1ac1;}
+  
+  .table_users tr:hover {background-color: #ddd;}
+  
+  .table_users th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }

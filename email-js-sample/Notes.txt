@@ -1,0 +1,26 @@
+JSX -> JavaScript & XML
+TS -> TypeScript
+JSX is the syntax by which you can create/update template in javascript
+TS is a cross compiler which add extra OOPS features to javascript and convert those functionality into scallable javascript
+
+Memory lick in JS
+1> Due to bad variable definition. 
+2> Due to unsubscription of ovserver.
+
+useEffect(()=>{
+    // when component loads
+},[])
+
+useEffect(()=>{
+    // when component changes
+});
+
+useEffect(()=>{
+    return ()=>{
+        // when component unloads
+    }
+})
+
+useEffect(()=>()=>{
+    
+})
