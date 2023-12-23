@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import store_todo from "../../store/todo/todo.store";
+import { action_deleteTodo } from "../../store/todo/todo.action";
 function TodoTableComponent() {
     const [todoList, setTodoLost] = useState([]);
     useEffect(() => {
@@ -7,8 +8,9 @@ function TodoTableComponent() {
             setTodoLost(store_todo.getState()['TodoList']);
         });
     }, []);
-    const deleteTodo = ()=>{
-
+    const deleteTodo = (title)=>{
+        action_deleteTodo.title = title;
+        store_todo.dispatch(action_deleteTodo);
     }
     return (
         <div>
@@ -37,7 +39,7 @@ function TodoTableComponent() {
                                 {item.important? 'Yes': 'No'}
                             </td>
                             <td>
-                                <a href="#" onClick={deleteTodo}>Delete</a>
+                                <a href="#" onClick={deleteTodo.bind(this, item.title)}>Delete</a>
                             </td>
                         </tr>
                     ))}
