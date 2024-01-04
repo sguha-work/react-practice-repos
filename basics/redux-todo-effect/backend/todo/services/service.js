@@ -1,6 +1,5 @@
 import DBService from "./db.service.js";
 import model from "../models/model.js";
-import { response } from "express";
 class Service {
     static async get({page, limit}) {
         let connection;
