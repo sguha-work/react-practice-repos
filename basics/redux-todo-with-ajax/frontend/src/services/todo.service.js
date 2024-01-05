@@ -1,5 +1,5 @@
 export default class TodoService {
-    static async getTodo(page = 0, limit = 20) {
+    static async getTodo({ page, limit }) {
         try {
             const url = `http://localhost:3000/todo?page=${page}&limit=${limit}`;
             const stream = await fetch(url);
@@ -9,4 +9,5 @@ export default class TodoService {
             return Promise.reject(error);
         }
     }
+    
 }

@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import store_todo from "../../store/todo/todo.store";
-import { action_addTodo } from "../../store/todo/todo.action";
 function AddTodoFormComponent() {
     const addTodoForm = useRef(null)
 
@@ -8,11 +7,11 @@ function AddTodoFormComponent() {
         event.preventDefault();
         const form = addTodoForm.current;
         console.log(form['title'].value, form['important'].checked);
-        action_addTodo.payload = {
-            title: form['title'].value,
-            important: form['important'].checked
-        }
-        store_todo.dispatch(action_addTodo);
+        // action_addTodo.payload = {
+        //     title: form['title'].value,
+        //     important: form['important'].checked
+        // }
+        // store_todo.dispatch(action_addTodo);
     }
   return (
     <div>
