@@ -7,6 +7,9 @@ class Controller {
   static async get(request, response) {
     return await commonController.handleRequest(request, Service.get, response, GetValidatorSchema);
   };
+  static async delete(request, response) {
+    return await commonController.handleRequest(request, Service.delete, response);
+  };
   static async post(request, response) {
     return await commonController.handleRequest(request, Service.post, response);
   };

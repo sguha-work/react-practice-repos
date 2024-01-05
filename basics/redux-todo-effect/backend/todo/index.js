@@ -17,7 +17,7 @@ app.use(express.json());
 let index = 0;
 Object.keys(Router).forEach((method) => {
   Object.keys(Router[method]).forEach((path) => {
-    Logger.log(`<${index}>  ${method}  http://localhost:${port}${path}`, 'warn');
+    Logger.log(`<${index}>  ${method.toUpperCase()}  http://localhost:${port}${path}`, 'warn');
     index += 1;
     app[method](path, async (request, response) => {
       try {
