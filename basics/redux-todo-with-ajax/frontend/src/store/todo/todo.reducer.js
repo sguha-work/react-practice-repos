@@ -1,4 +1,4 @@
-import { action_fetchTodo, action_addTodo } from "./todo.action";
+import { action_fetchTodo, action_addTodo, action_deleteTodo } from "./todo.action";
 import { initialTodoState } from "./todo.state";
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -29,6 +29,18 @@ const todoSlice = createSlice({
             state.error = null;
         }).addCase(action_addTodo.rejected, (state, action) => {
             console.log('add rejected');
+            state.loading = false;
+            state.error = action.payload;
+        });
+        builder.addCase(action_deleteTodo.pending, (state) => {
+            console.log('delete loading');
+            state.loading = true;
+        }).addCase(action_deleteTodo.fulfilled, (state, action) => {
+            console.log('delete fulfilled', action.payload);
+            state.loading = false;
+            state.error = null;
+        }).addCase(action_deleteTodo.rejected, (state, action) => {
+            console.log('delete rejected');
             state.loading = false;
             state.error = action.payload;
         });

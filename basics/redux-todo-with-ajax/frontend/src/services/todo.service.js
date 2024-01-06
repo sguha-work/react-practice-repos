@@ -9,7 +9,7 @@ export default class TodoService {
             return Promise.reject(error);
         }
     }
-    static async addTodo({ title, important }) {console.log({title, important})
+    static async addTodo({ title, important }) {
         try {
             const url = `http://localhost:3000/todo`;
             const stream = await fetch(url, {
@@ -18,6 +18,21 @@ export default class TodoService {
                     title,
                     important
                 }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            const data = await stream.json();
+            return Promise.resolve(data);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+    static async deleteTodo({ id }) {
+        try {
+            const url = `http://localhost:3000/todo/${id}`;
+            const stream = await fetch(url, {
+                method: "DELETE",
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 }
