@@ -27,7 +27,7 @@ class Service {
             console.log({ title, important });
             const todo = new model({ title, important })
             connection = await DBService.connect();
-            DBService.save(todo);
+            await DBService.save(todo);
             return Promise.resolve(response);
         } catch (error) {
             response.status = 501;
