@@ -1,8 +1,15 @@
 import { useEffect } from "react"
 import Ajax from "../../services/ajax.service"
 import { useState } from "react";
+import ModalComponent from "./modal.component";
 function OurOrganicProductsComponent() {
     const [fruitsData, setFruitsData]= useState([]);
+    const [modalHeading, setModalHeading] = useState("");
+    const [modalBody, setModalBody] = useState("");
+    const showModal = (fruit)=>{
+        setModalHeading(fruit.name);
+        setModalBody(JSON.stringify(fruit.nutritions));
+    }
     useEffect(() => {
         // (function(){
 
@@ -93,6 +100,8 @@ function OurOrganicProductsComponent() {
                                                 <div className="rounded position-relative fruite-item">
                                                     <div className="fruite-img">
                                                         <img
+                                                            onClick={showModal.bind({},fruit)}
+                                                            data-bs-toggle="modal" data-bs-target="#myModal"
                                                             src="/src/assets/img/fruite-item-5.jpg"
                                                             className="img-fluid w-100 rounded-top"
                                                             alt=""
@@ -778,6 +787,7 @@ function OurOrganicProductsComponent() {
                     </div>
                 </div>
             </div>
+            <ModalComponent heading={modalHeading} body={modalBody}></ModalComponent>
         </>
     )
 }
