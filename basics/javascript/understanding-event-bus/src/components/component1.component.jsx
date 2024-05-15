@@ -8,6 +8,9 @@ function Component1Component() {
             setValue(data.value)
           );
     },[]);
+    useEffect(()=>()=>{
+        EventBus.off("valueChanged");
+    })
   return (
     <div>
         <h1>This is child component 1</h1>
