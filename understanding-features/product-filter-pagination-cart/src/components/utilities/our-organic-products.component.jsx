@@ -1,24 +1,16 @@
-import { useEffect } from "react"
-import Ajax from "../../services/ajax.service"
+import { useEffect } from "react";
 import { useState } from "react";
 import ModalComponent from "./modal.component";
-function OurOrganicProductsComponent() {
-    const [fruitsData, setFruitsData]= useState([]);
-    const [modalHeading, setModalHeading] = useState("");
-    const [modalBody, setModalBody] = useState("");
+import EventBusService from "../../services/event-bus.service";
+function OurOrganicProductsComponent(props) {
+     const [modalHeading, setModalHeading] = useState("");
+     const [modalBody, setModalBody] = useState("");
     const showModal = (fruit)=>{
-        setModalHeading(fruit.name);
-        setModalBody(JSON.stringify(fruit.nutritions));
+         setModalHeading(fruit.name);
+         setModalBody(JSON.stringify(fruit.nutritions));
     }
     useEffect(() => {
-        // (function(){
-
-        // })();
-        (async () => {
-            const data = await Ajax.get("http://localhost:3000/fruit/all");
-            console.log(data);
-            setFruitsData(data.data);
-        })();
+            EventBusService.dispatch("Fetch-organic-product");
     }, []);
     return (
         <>
@@ -94,7 +86,7 @@ function OurOrganicProductsComponent() {
                                 <div className="row g-4">
                                     <div className="col-lg-12">
                                         <div className="row g-4">
-                                        {fruitsData.map((fruit, index)=>{
+                                        {props.fruitsData.map((fruit, index)=>{
                                             return (
                                                 <div key={index} className="col-md-6 col-lg-4 col-xl-3">
                                                 <div className="rounded position-relative fruite-item">

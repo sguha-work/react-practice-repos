@@ -1,7 +1,36 @@
+import { useEffect, useLayoutEffect, useState } from "react"
 import BestSellerContainerComponent from "../utilities/best-seller-container.component"
-import OurOrganicProductsComponent from "../utilities/our-organic-products.component"
 
+import EventBusService from "../../services/event-bus.service";
+import OurOrganicProduct from "../../services/our-organic-product.service";
+import OurOrganicProductsComponent from "../utilities/our-organic-products.component"
 function HomePageComponent() {
+  const [fruitsData, setFruitsData] = useState([]);
+  useLayoutEffect(()=>{
+    EventBusService.on("Fetch-organic-product",()=>{console.log("Fetch-organic-product called")
+      OurOrganicProduct.getProduct();
+    });
+    EventBusService.on("Fetch-organic-product-success",(data)=>{
+      console.log("setFruitsData", data);
+      setFruitsData(data);
+    });
+    EventBusService.on("Fetch-organic-product-failed",()=>{
+
+    });
+  },[]);
+  useEffect(()=>{console.log("Home page loaded")
+    
+  },[]);
+  // useEffect(()=>{
+  //   return ()=>{
+  //     // this function gets called when the component is destroyed
+  //   }
+  // });
+  useEffect(()=>()=>{
+    // EventBusService.unsubscribe("Fetch-organic-product");
+    // EventBusService.unsubscribe("Fetch-organic-product-success");
+    // EventBusService.unsubscribe("Fetch-organic-product-failed");
+  });
   return (
     <>
       
@@ -280,7 +309,7 @@ function HomePageComponent() {
       </div>
       {/* Featurs Section End */}
       {/* Fruits Shop Start*/}
-      <OurOrganicProductsComponent></OurOrganicProductsComponent>
+      <OurOrganicProductsComponent fruitsData={fruitsData}></OurOrganicProductsComponent>
       {/* Fruits Shop End*/}
       {/* Featurs Start */}
       <div className="container-fluid service py-5">
