@@ -1,14 +1,21 @@
 const EventBusService = {
-    on: (event, callback) => {
-        document.addEventListener(event, (e) => {
-            callback(e.detail);
-        })
+    timer: {},
+    on(event, callback) {
+      document.addEventListener(event, (e) => {
+        if(EventBusService.timer[event]) {
+          window.clearTimeout(EventBusService.timer[event])
+        }
+        EventBusService.timer[event] = window.setTimeout(()=>{
+          callback(e.detail)  
+        },10);
+      });
     },
-    off: (event, callback) => {
-        document.removeEventListener(event,callback);
+    dispatch(event, data) {
+      document.dispatchEvent(new CustomEvent(event, { detail: data }));
     },
-    dispatch: (event, data) => {
-        document.dispatchEvent(new CustomEvent(event, {detail:data}));
-    }
-}
-export default EventBusService;
+    off(event, callback) {
+      document.removeEventListener(event, callback);
+    },
+  };
+  
+  export default EventBusService;

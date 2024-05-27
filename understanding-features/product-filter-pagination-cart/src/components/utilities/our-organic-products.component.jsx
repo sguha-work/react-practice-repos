@@ -2,16 +2,28 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ModalComponent from "./modal.component";
 import EventBusService from "../../services/event-bus.service";
-function OurOrganicProductsComponent(props) {
-     const [modalHeading, setModalHeading] = useState("");
-     const [modalBody, setModalBody] = useState("");
-    const showModal = (fruit)=>{
-         setModalHeading(fruit.name);
-         setModalBody(JSON.stringify(fruit.nutritions));
+function OurOrganicProductsComponent({ fruitsData, searchInput }) {
+    const [modalHeading, setModalHeading] = useState("");
+    const [modalBody, setModalBody] = useState("");
+    const [fruits, setFruits] = useState([]);
+    const showModal = (fruit) => {
+        setModalHeading(fruit.name);
+        setModalBody(JSON.stringify(fruit.nutritions));
     }
     useEffect(() => {
-            EventBusService.dispatch("Fetch-organic-product");
+        EventBusService.dispatch("Fetch-organic-product");
+        if (!fruitsData) {
+            fruitsData = [];
+        }
     }, []);
+    useEffect(() => {
+        setFruits(fruitsData);
+    }, [fruitsData]);
+    useEffect(() => {
+        console.log("searchInput", searchInput);
+        const data = fruitsData.filter((fruit) => fruit.name.toLowerCase().indexOf(searchInput.toLowerCase()) != -1)
+        setFruits([...data]);
+    }, [searchInput]);
     return (
         <>
             <div className="container-fluid fruite py-5">
@@ -21,7 +33,7 @@ function OurOrganicProductsComponent(props) {
                             <div className="col-lg-4 text-start">
                                 <h1>Our Organic Products</h1>
                             </div>
-                            <div className="col-lg-8 text-end">
+                            {/* <div className="col-lg-8 text-end">
                                 <ul className="nav nav-pills d-inline-flex text-center mb-5">
                                     <li className="nav-item">
                                         <a
@@ -79,54 +91,54 @@ function OurOrganicProductsComponent(props) {
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="tab-content">
                             <div id="tab-1" className="tab-pane fade show p-0 active">
                                 <div className="row g-4">
                                     <div className="col-lg-12">
                                         <div className="row g-4">
-                                        {props.fruitsData.map((fruit, index)=>{
-                                            return (
-                                                <div key={index} className="col-md-6 col-lg-4 col-xl-3">
-                                                <div className="rounded position-relative fruite-item">
-                                                    <div className="fruite-img">
-                                                        <img
-                                                            onClick={showModal.bind({},fruit)}
-                                                            data-bs-toggle="modal" data-bs-target="#myModal"
-                                                            src="/src/assets/img/fruite-item-5.jpg"
-                                                            className="img-fluid w-100 rounded-top"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                    <div
-                                                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                        style={{ top: 10, left: 10 }}
-                                                    >
-                                                        Fruits
-                                                    </div>
-                                                    <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                        <h4>{fruit.name}</h4>
-                                                        <p>
-                                                            Family - {fruit.family} Order - {fruit.order} Genus - {fruit.genus}
-                                                        </p>
-                                                        <div className="d-flex justify-content-between flex-lg-wrap">
-                                                            <p className="text-dark fs-5 fw-bold mb-0">
-                                                                $4.99 / kg
-                                                            </p>
-                                                            <a
-                                                                href="#"
-                                                                className="btn border border-secondary rounded-pill px-3 text-primary"
+                                            {fruits.map((fruit, index) => {
+                                                return (
+                                                    <div key={index} className="col-md-6 col-lg-4 col-xl-3">
+                                                        <div className="rounded position-relative fruite-item">
+                                                            <div className="fruite-img">
+                                                                <img
+                                                                    onClick={showModal.bind({}, fruit)}
+                                                                    data-bs-toggle="modal" data-bs-target="#myModal"
+                                                                    src="/src/assets/img/fruite-item-5.jpg"
+                                                                    className="img-fluid w-100 rounded-top"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                            <div
+                                                                className="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                                style={{ top: 10, left: 10 }}
                                                             >
-                                                                <i className="fa fa-shopping-bag me-2 text-primary" />{" "}
-                                                                Add to cart
-                                                            </a>
+                                                                Fruits
+                                                            </div>
+                                                            <div className="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                                <h4>{fruit.name}</h4>
+                                                                <p>
+                                                                    Family - {fruit.family} Order - {fruit.order} Genus - {fruit.genus}
+                                                                </p>
+                                                                <div className="d-flex justify-content-between flex-lg-wrap">
+                                                                    <p className="text-dark fs-5 fw-bold mb-0">
+                                                                        $4.99 / kg
+                                                                    </p>
+                                                                    <a
+                                                                        href="#"
+                                                                        className="btn border border-secondary rounded-pill px-3 text-primary"
+                                                                    >
+                                                                        <i className="fa fa-shopping-bag me-2 text-primary" />{" "}
+                                                                        Add to cart
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            );
-                                        })}
+                                                );
+                                            })}
                                             {/* <div className="col-md-6 col-lg-4 col-xl-3">
                                                 <div className="rounded position-relative fruite-item">
                                                     <div className="fruite-img">
