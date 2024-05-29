@@ -20,5 +20,51 @@ class Service {
             return Promise.reject(error);
         }
     }
+    getMenu() {
+        const menuData = [
+            {
+                title: "Home",
+                link: "home",
+                submenu: []
+            },
+            {
+                title: "Shop",
+                link: "shop",
+                submenu: []
+            },
+            {
+                title: "Shop Detail",
+                link: "shop-detail",
+                submenu: []
+            },
+            {
+                title: "Pages",
+                link: "pages",
+                submenu: [{
+                    title: "Cart",
+                    link: "cart"
+                }, {
+                    title: "Checkout",
+                    link: "checkout"
+                }, {
+                    title: "Testimonial",
+                    link: "testimonila"
+                }, {
+                    title: "404",
+                    link: "404"
+                },]
+            },
+            {
+                title: "Contact",
+                link: "contact",
+                submenu: []
+            }
+        ];
+        try {
+            return Promise.resolve(menuData);
+        } catch (e) {
+            return Promise.reject(e);
+        }
+    }
 }
 export default Service;

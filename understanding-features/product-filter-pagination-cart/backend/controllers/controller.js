@@ -15,5 +15,8 @@ class Controller {
   async getAllFruits(request, response) {
     return await commonController.handleRequest(request, service.getAllFruits, response);
   }
+  async getMenu(request, response) {
+    return await commonController.handleRequest(request, service.getMenu, response);
+  }
 }
 export default Controller;

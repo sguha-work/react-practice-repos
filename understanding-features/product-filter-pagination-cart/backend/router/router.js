@@ -11,6 +11,13 @@ const Router = {
                 console.log("Error in router", e);
             }
         },
+        '/menu': (request, response) => {
+            try {
+                controller.getMenu(request, response);
+            } catch (e) {
+                console.log("Error in router", e);
+            }
+        },
     }
 
 }
