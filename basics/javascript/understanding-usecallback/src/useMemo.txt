@@ -1,0 +1,25 @@
+import { useMemo, useState } from 'react';
+
+function App() {
+  const calculateFactorial = (inputValue) => {
+    let result = 1;
+    for (let index = inputValue; index >= 1; index--) {
+      result *= index;
+    }
+    return result;
+  }
+  const [value, setValue] = useState(0);
+  // this memoized value will be displayed on screen for same input it should not call the calculateFactorial function rather it should return the memoized value
+  const memoizedFactorialValue = useMemo(calculateFactorial.bind({},value), [value]);
+  const inputchanged = (event) => {
+    setValue(event.target.value);
+  }
+  return (
+    <>
+      <input type="number" onChange={inputchanged} value={value}></input>
+      <b>{memoizedFactorialValue}</b>
+    </>
+  )
+}
+
+export default App
