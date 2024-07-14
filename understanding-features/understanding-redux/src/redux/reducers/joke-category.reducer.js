@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { action_fetchJokeCategory } from "../actions/joke-category.action";
-
+// this reducer is for updating store value of categories
 const jokeCategorySlice = createSlice({
     name:"jokeCategory",
     initialState: {
@@ -10,7 +10,6 @@ const jokeCategorySlice = createSlice({
     },
     extraReducers:(builder)=>{
         builder.addCase(action_fetchJokeCategory.fulfilled, (store, response)=>{
-            console.log("response", response);
             store.data = response.payload;
             store.pending = false;
             store.error = null;

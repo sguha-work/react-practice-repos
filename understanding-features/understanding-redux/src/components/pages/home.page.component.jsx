@@ -1,17 +1,26 @@
 import { useEffect } from "react";
 import JokeCategoryDropdownComponent from "../utilities/joke-category-dropdown.component"
 import JokesTableComponent from "../utilities/jokes-table.component"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { action_fetchJokeCategory } from "../../redux/actions/joke-category.action";
+import { Link } from 'react-router-dom';
 function HomePageComponent() {
   const dispatch = useDispatch();
+  const jokeCategory = useSelector((state) => state);
   useEffect(() => {
-    dispatch(action_fetchJokeCategory());
+    // checking if category data exists in store or not
+    if (jokeCategory.categories && jokeCategory.categories.data) {
+      // data exists do not need to dispatch action
+    } else {
+      // category data doesn't exists dispatching action to fetch data
+      dispatch(action_fetchJokeCategory());
+    }
   }, []);
   return (
     <div>
       <JokeCategoryDropdownComponent></JokeCategoryDropdownComponent>
       <JokesTableComponent></JokesTableComponent>
+      <Link to={"/about"}>About page</Link>
     </div>
   )
 }

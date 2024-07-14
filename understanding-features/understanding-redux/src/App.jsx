@@ -1,11 +1,12 @@
+import { RouterProvider } from 'react-router-dom'
 import './App.css'
-import HomePageComponent from './components/pages/home.page.component'
+import routes from './router'
 
 function App() {
 
   return (
     <>
-      <HomePageComponent></HomePageComponent>
+      <RouterProvider router={routes}></RouterProvider>
     </>
   )
 }
