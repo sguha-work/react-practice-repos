@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { action_fetchJokes } from "../../redux/actions/jokes.action";
+import PerformanceService from "../../services/performence.service";
 function JokeCategoryDropdownComponent() {
   const [categories, setCategories] = useState(null);
   const store = useSelector((state) => state);
@@ -8,6 +9,10 @@ function JokeCategoryDropdownComponent() {
   useEffect(() => {
     // if category data exists in store setting up state variable to populate the data
     store.categories && store.categories.data && setCategories(store.categories.data);
+    if(store.categories) {
+      PerformanceService.endTime = performance.now();
+      console.log("Time to populate dropdown menu", PerformanceService.endTime-PerformanceService.startTime);
+    }
   }, [store.categories]);
   const categoryChanged = (event) => {
     const data = event.target.value;
